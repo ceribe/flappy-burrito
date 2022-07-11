@@ -1,0 +1,26 @@
+local speed = -240
+local types = {"avocado", "cheese", "gold-coin", "pepper", "tomato"}
+
+function init(self)
+	math.randomseed(os.time())
+	self.type = math.random(1, 5)
+	msg.post("#sprite", "play_animation", { id = hash(types[self.type]) })       
+end
+
+function update(self, dt)
+	local p = go.get_position()
+	p.x = p.x + speed * dt
+	if p.x < -100 then
+		go.delete()
+	end
+	go.set_position(p)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("collision_response") then
+		-- msg.post("main#gui", "add_score", {amount = score})
+		-- TODO Add score or sth
+		-- TODO Add some particles 
+		go.delete()
+	end
+end
