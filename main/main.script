@@ -1,4 +1,42 @@
+local gs = require "game_state"
+
 function init(self)
 	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
 	msg.post("@render:", "clear_color", { color = vmath.vector4(0.8, 0.65, 0.33, 0) } )
+end
+
+local colors = { default = vmath.vector4(0.8, 0.65, 0.33, 0), red = vmath.vector4(0.94, 0.29, 0.29, 0), yellow = vmath.vector4(0.93, 0.55, 0, 0) }
+
+function set_bg_color(bg_color)
+	msg.post("@render:", "clear_color", { color = bg_color } )
+end
+
+function update(self, dt)
+	if gs.remaining_chilli_time > 0 then
+		gs.remaining_chilli_time = gs.remaining_chilli_time - dt
+		if gs.remaining_chilli_time <= 0 then
+			set_bg_color(colors["default"])
+		end
+	end
+
+	if gs.remaining_cheese_time > 0 then
+		gs.remaining_cheese_time = gs.remaining_cheese_time - dt
+		if gs.remaining_cheese_time <= 0 then
+			set_bg_color(colors["default"])
+		end
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("start_chilli_time") then
+		-- TODO Show text 
+		gs.remaining_chilli_time = 5
+		gs.remaining_cheese_time = 0
+		set_bg_color(colors["red"])
+	elseif message_id == hash("start_cheese_time") then
+		-- TODO Show text 
+		gs.remaining_cheese_time = 5
+		gs.remaining_chilli_time = 0
+		set_bg_color(colors["yellow"])
+	end
 end
