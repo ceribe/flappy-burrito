@@ -1,10 +1,25 @@
 local speed = -240
-local types = {"avocado", "cheese", "gold-coin", "pepper", "tomato"}
+local types = { "avocado", "pepper", "cheese", "tomato", "gold-coin", "diamond-coin" }
 
 function init(self)
 	math.randomseed(os.time())
-	self.type = math.random(1, 5)
-	msg.post("#sprite", "play_animation", { id = hash(types[self.type]) })       
+	assign_random_type(self)
+	-- self.type = types[math.random(1, 6)] -- For testing
+	msg.post("#sprite", "play_animation", { id = hash(self.type) })
+end
+
+function assign_random_type(self)
+	if math.random() < 0.9 then
+		self.type = "gold-coin"
+		return
+	end
+	
+	if math.random() > 0.9 then
+		self.type = "diamond-coin"
+		return
+	end
+		
+	self.type = types[math.random(1, 4)]
 end
 
 function update(self, dt)
