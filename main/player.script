@@ -1,5 +1,6 @@
-local max_y = 1136
-local min_y = 0
+local player_y_size = 80
+local max_y = 1136 + player_y_size / 2
+local min_y = 0 - player_y_size / 2
 local max_speed = 400
 
 function init(self)
