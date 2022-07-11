@@ -1,0 +1,26 @@
+local max_y = 1136
+local min_y = 0
+local max_speed = 400
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.speed = 0
+end
+
+function update(self, dt)
+	local p = go.get_position()
+	p.y = p.y + self.speed * dt
+	if p.y < min_y then
+		p.y = min_y
+	elseif p.y > max_y then
+		p.y = max_y
+	end
+	go.set_position(p)
+	self.speed = self.speed - 16
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") then
+		self.speed = max_speed
+	end
+end
