@@ -21,7 +21,7 @@ function update(self, dt)
 end
 
 function on_input(self, action_id, action)
-	if action_id == hash("touch") then
+	if action_id == hash("touch") or action_id == hash("jump") then
 		self.speed = max_speed
 	end
 end
