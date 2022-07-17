@@ -131,9 +131,9 @@ embedded_instances {
     w: 1.0
   }
   scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
+    x: 2.0
+    y: 2.0
+    z: 2.0
   }
 }
 embedded_instances {
@@ -230,7 +230,7 @@ embedded_instances {
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
   "  data: \"tile_set: \\\"/main/bgs.atlas\\\"\\n"
-  "default_animation: \\\"bg_default\\\"\\n"
+  "default_animation: \\\"bg-default\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "\"\n"

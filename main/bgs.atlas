@@ -1,13 +1,13 @@
 images {
-  image: "/assets/bgs/bg_cheese.png"
+  image: "/assets/bgs/bg-cheese.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/assets/bgs/bg_chilli.png"
+  image: "/assets/bgs/bg-chilli.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/assets/bgs/bg_default.png"
+  image: "/assets/bgs/bg-default.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0
