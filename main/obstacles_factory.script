@@ -1,3 +1,5 @@
+local gs = require "game_state"
+
 local frequency = 0.5
 local min_y = 300
 local max_y = 836
@@ -7,6 +9,9 @@ function init(self)
 end
 
 function update(self, dt)
+	if gs.state ~= GS_PLAYING then
+		return
+	end
 	self.timer = self.timer - dt
 	if self.timer <= 0 then
 		self.timer = 1/frequency

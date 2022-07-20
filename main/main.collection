@@ -86,8 +86,8 @@ embedded_instances {
   "  shapes {\\n"
   "    shape_type: TYPE_SPHERE\\n"
   "    position {\\n"
-  "      x: 0.0\\n"
-  "      y: 0.0\\n"
+  "      x: -10.5\\n"
+  "      y: -7.0\\n"
   "      z: 0.0\\n"
   "    }\\n"
   "    rotation {\\n"
@@ -99,7 +99,24 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 1\\n"
   "  }\\n"
-  "  data: 31.1655\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_SPHERE\\n"
+  "    position {\\n"
+  "      x: 12.0\\n"
+  "      y: 4.0\\n"
+  "      z: 0.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "      x: 0.0\\n"
+  "      y: 0.0\\n"
+  "      z: 0.0\\n"
+  "      w: 1.0\\n"
+  "    }\\n"
+  "    index: 1\\n"
+  "    count: 1\\n"
+  "  }\\n"
+  "  data: 19.7745\\n"
+  "  data: 19.7745\\n"
   "}\\n"
   "linear_damping: 0.0\\n"
   "angular_damping: 0.0\\n"
@@ -122,7 +139,7 @@ embedded_instances {
   position {
     x: 100.0
     y: 568.0
-    z: 0.0
+    z: 1.0
   }
   rotation {
     x: 0.0
@@ -133,7 +150,7 @@ embedded_instances {
   scale3 {
     x: 2.0
     y: 2.0
-    z: 2.0
+    z: 1.0
   }
 }
 embedded_instances {

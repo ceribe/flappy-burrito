@@ -23,7 +23,16 @@ function assign_random_type(self)
 	self.type = types[math.random(1, 4)]
 end
 
+function get_score(self)
+	local multiplier = gs.remaining_chilli_time > 0 and 2 or 1
+	local score = self.type == "diamond-coin" and 10 or 1
+	return score * multiplier
+end
+
 function update(self, dt)
+	if gs.state ~= GS_PLAYING then
+		return
+	end
 	local p = go.get_position()
 	p.x = p.x + gs.game_speed * gs.game_speed_multiplier * dt
 	if p.x < -100 then
@@ -34,8 +43,8 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("collision_response") then
-		-- msg.post("main#gui", "add_score", {amount = score})
-		-- TODO Add score or sth
+		gs.score = gs.score + get_score(self)
+		msg.post("/gui#gui", "update_score", {score = gs.score})
 		-- TODO Add some particles 
 		if self.type == "pepper" then
 			msg.post("/main_go#main", "start_chilli_time")
