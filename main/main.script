@@ -37,6 +37,9 @@ function on_message(self, message_id, message, sender)
 		gs.remaining_cheese_time = 8.1
 		gs.remaining_chilli_time = 0
 		set_biome("cheese")
+	elseif message_id == hash("player_died") then
+		gs.state = GS_PLAYER_DIED
+		msg.post("/gui#gui", "player_died")
 	end
 end
 

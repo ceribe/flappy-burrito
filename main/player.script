@@ -18,10 +18,8 @@ function update(self, dt)
 	
 	local p = go.get_position()
 	p.y = p.y + self.speed * dt
-	if p.y < min_y then
-		p.y = min_y
-	elseif p.y > max_y then
-		p.y = max_y
+	if p.y < min_y or p.y > max_y then
+		msg.post("/main_go#main", "player_died")
 	end
 	go.set_position(p)
 	self.speed = self.speed - 20
@@ -58,8 +56,7 @@ function on_message(self, message_id, message, sender)
 			go.delete(message.fry_id)
 			-- TODO Spawn some particles
 		else
-			gs.state = GS_PLAYER_DIED
-			msg.post("/gui#gui", "player_died")
+			msg.post("/main_go#main", "player_died")
 		end
 	end
 end
