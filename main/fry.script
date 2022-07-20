@@ -1,0 +1,19 @@
+local gs = require "game_state"
+
+function update(self, dt)
+	local p = go.get_position()
+	p.x = p.x + gs.game_speed * gs.game_speed_multiplier * dt
+	if p.x < -100 then
+		go.delete()
+	end
+	go.set_position(p)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("collision_response") then
+		-- TODO Add score or sth
+		-- TODO Add some particles 
+		go.delete(message.other_id)
+		-- go.delete()
+	end
+end

@@ -5,7 +5,7 @@ function init(self)
 end
 
 function set_bg(name)
-	msg.post("/bg#sprite", "play_animation", { id = hash("bg_" .. name) })
+	msg.post("/bg#sprite", "play_animation", { id = hash("bg-" .. name) })
 end
 
 function update(self, dt)

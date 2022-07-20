@@ -1,6 +1,6 @@
 local frequency = 0.5
-local min_y = 100
-local max_y = 1036
+local min_y = 300
+local max_y = 836
 
 function init(self)
 	self.timer = 1/frequency
@@ -12,6 +12,6 @@ function update(self, dt)
 		self.timer = 1/frequency
 		local p = go.get_position()
 		p.y = vmath.lerp(math.random(), min_y, max_y)
-		factory.create("#factory", p)
+		collectionfactory.create("#collectionfactory", p)
 	end
 end

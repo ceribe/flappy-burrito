@@ -1,26 +1,10 @@
-name: "main"
-scale_along_z: 0
-embedded_instances {
-  id: "main_go"
-  data: "components {\n"
-  "  id: \"main\"\n"
-  "  component: \"/main/main.script\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  ""
+name: "default"
+instances {
+  id: "collectible"
+  prototype: "/main/collectible.go"
   position {
-    x: 320.0
-    y: 568.0
+    x: 0.0
+    y: 0.0
     z: 0.0
   }
   rotation {
@@ -35,11 +19,12 @@ embedded_instances {
     z: 1.0
   }
 }
+scale_along_z: 0
 embedded_instances {
-  id: "player"
+  id: "upper_fry"
   data: "components {\n"
-  "  id: \"player\"\n"
-  "  component: \"/main/player.script\"\n"
+  "  id: \"fry\"\n"
+  "  component: \"/main/fry.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -56,7 +41,7 @@ embedded_instances {
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
   "  data: \"tile_set: \\\"/main/main.atlas\\\"\\n"
-  "default_animation: \\\"burrito\\\"\\n"
+  "default_animation: \\\"fry\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "\"\n"
@@ -84,7 +69,7 @@ embedded_instances {
   "mask: \\\"default\\\"\\n"
   "embedded_collision_shape {\\n"
   "  shapes {\\n"
-  "    shape_type: TYPE_SPHERE\\n"
+  "    shape_type: TYPE_BOX\\n"
   "    position {\\n"
   "      x: 0.0\\n"
   "      y: 0.0\\n"
@@ -97,9 +82,11 @@ embedded_instances {
   "      w: 1.0\\n"
   "    }\\n"
   "    index: 0\\n"
-  "    count: 1\\n"
+  "    count: 3\\n"
   "  }\\n"
-  "  data: 31.1655\\n"
+  "  data: 60.0\\n"
+  "  data: 500.0\\n"
+  "  data: 10.0\\n"
   "}\\n"
   "linear_damping: 0.0\\n"
   "angular_damping: 0.0\\n"
@@ -120,43 +107,8 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 100.0
-    y: 568.0
-    z: 0.0
-  }
-  rotation {
     x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 2.0
-    y: 2.0
-    z: 2.0
-  }
-}
-embedded_instances {
-  id: "gui"
-  data: "components {\n"
-  "  id: \"gui\"\n"
-  "  component: \"/main/gui.gui\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  ""
-  position {
-    x: 0.0
-    y: 0.0
+    y: 650.0
     z: 0.0
   }
   rotation {
@@ -172,12 +124,27 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "bg"
-  data: "embedded_components {\n"
+  id: "lower_fry"
+  data: "components {\n"
+  "  id: \"fry\"\n"
+  "  component: \"/main/fry.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"tile_set: \\\"/main/bgs.atlas\\\"\\n"
-  "default_animation: \\\"bg-default\\\"\\n"
+  "  data: \"tile_set: \\\"/main/main.atlas\\\"\\n"
+  "default_animation: \\\"fry\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
   "\"\n"
@@ -193,46 +160,41 @@ embedded_instances {
   "    w: 1.0\n"
   "  }\n"
   "}\n"
-  ""
-  position {
-    x: 320.0
-    y: 568.0
-    z: -1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-embedded_instances {
-  id: "obstacles_factory"
-  data: "components {\n"
-  "  id: \"obstacles_factory\"\n"
-  "  component: \"/main/obstacles_factory.script\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
   "embedded_components {\n"
-  "  id: \"collectionfactory\"\n"
-  "  type: \"collectionfactory\"\n"
-  "  data: \"prototype: \\\"/main/obstacle.collection\\\"\\n"
-  "load_dynamically: false\\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_KINEMATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"default\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      x: 0.0\\n"
+  "      y: 0.0\\n"
+  "      z: 0.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "      x: 0.0\\n"
+  "      y: 0.0\\n"
+  "      z: 0.0\\n"
+  "      w: 1.0\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 60.0\\n"
+  "  data: 500.0\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "bullet: false\\n"
   "\"\n"
   "  position {\n"
   "    x: 0.0\n"
@@ -248,8 +210,8 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 1000.0
-    y: 568.0
+    x: 0.0
+    y: -650.0
     z: 0.0
   }
   rotation {

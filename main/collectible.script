@@ -1,4 +1,5 @@
-local speed = -240
+local gs = require "game_state"
+
 local types = { "avocado", "pepper", "cheese", "tomato", "gold-coin", "diamond-coin" }
 
 function init(self)
@@ -24,7 +25,7 @@ end
 
 function update(self, dt)
 	local p = go.get_position()
-	p.x = p.x + speed * dt
+	p.x = p.x + gs.game_speed * gs.game_speed_multiplier * dt
 	if p.x < -100 then
 		go.delete()
 	end
