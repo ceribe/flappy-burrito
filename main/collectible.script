@@ -5,7 +5,7 @@ local types = { "avocado", "pepper", "cheese", "tomato", "gold-coin", "diamond-c
 function init(self)
 	math.randomseed(os.time())
 	assign_random_type(self)
-	-- self.type = types[math.random(1, 6)] -- For testing
+	self.type = types[math.random(1, 6)] -- For testing
 	msg.post("#sprite", "play_animation", { id = hash(self.type) })
 end
 
@@ -50,6 +50,8 @@ function on_message(self, message_id, message, sender)
 			msg.post("/main_go#main", "start_chilli_time")
 		elseif self.type == "cheese" then
 			msg.post("/main_go#main", "start_cheese_time")
+		elseif self.type == "avocado" then
+			msg.post("/player#player", "avocado_collected")
 		end
 		go.delete()
 	end

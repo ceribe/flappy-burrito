@@ -37,3 +37,20 @@ function on_input(self, action_id, action)
 		self.speed = max_speed
 	end
 end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("avocado_collected") then
+		gs.player_has_avocado_shield = true
+		msg.post("#sprite", "play_animation", { id = hash("burrito-con-avocado") })
+	elseif message_id == hash("fry_collision") then
+		if gs.player_has_avocado_shield then
+			gs.player_has_avocado_shield = false
+			msg.post("#sprite", "play_animation", { id = hash("burrito") })
+			go.delete(message.fry_id)
+			-- TODO Spawn some particles
+		else
+			gs.state = GS_PLAYER_DIED
+			msg.post("/gui#gui", "player_died")
+		end
+	end
+end

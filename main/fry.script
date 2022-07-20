@@ -15,7 +15,6 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("collision_response") then
 		-- TODO Add some particles 
-		gs.state = GS_PLAYER_DIED
-		msg.post("/gui#gui", "player_died")
+		msg.post("/player#player", "fry_collision", {fry_id = go.get_id()})
 	end
 end

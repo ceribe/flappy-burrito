@@ -29,12 +29,12 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start_chilli_time") then
 		-- TODO Show text 
-		gs.remaining_chilli_time = 8
+		gs.remaining_chilli_time = 8.1
 		gs.remaining_cheese_time = 0
 		set_biome("chilli")
 	elseif message_id == hash("start_cheese_time") then
 		-- TODO Show text 
-		gs.remaining_cheese_time = 8
+		gs.remaining_cheese_time = 8.1
 		gs.remaining_chilli_time = 0
 		set_biome("cheese")
 	end
