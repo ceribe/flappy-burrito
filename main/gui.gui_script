@@ -1,9 +1,17 @@
 function init(self)
 	self.score_text = gui.get_node("score")
+	self.tap_to_restart_text = gui.get_node("tap_to_restart_text")
+	self.tap_to_start_text = gui.get_node("tap_to_start_text")
+
+	gui.set_enabled(self.tap_to_restart_text, false)
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("update_score") then
 		gui.set_text(self.score_text, message.score)
+	elseif message_id == hash("game_started") then
+		gui.set_enabled(self.tap_to_start_text, false)
+	elseif message_id == hash("player_died") then
+		gui.set_enabled(self.tap_to_restart_text, true)
 	end
 end

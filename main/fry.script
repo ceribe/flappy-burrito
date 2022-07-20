@@ -19,6 +19,7 @@ function on_message(self, message_id, message, sender)
 		-- go.delete(message.other_id)
 		-- go.delete()
 		gs.state = GS_PLAYER_DIED
+		msg.post("/gui#gui", "player_died")
 		-- sys.reboot()
 	end
 end
