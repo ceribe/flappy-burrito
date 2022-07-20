@@ -8,12 +8,14 @@ local max_speed = 500
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.speed = 0
+	self.rotation = 0
 end
 
 function update(self, dt)
 	if gs.state == GS_BEFORE_START then
 		return
 	end
+	
 	local p = go.get_position()
 	p.y = p.y + self.speed * dt
 	if p.y < min_y then
@@ -23,6 +25,12 @@ function update(self, dt)
 	end
 	go.set_position(p)
 	self.speed = self.speed - 20
+
+	self.rotation = self.rotation - 1
+	if self.rotation < -90 then
+		self.rotation = -90
+	end
+	go.set("player", "euler.z", self.rotation)
 end
 
 function on_input(self, action_id, action)
@@ -35,6 +43,7 @@ function on_input(self, action_id, action)
 			msg.post("/gui#gui", "game_started")
 		end
 		self.speed = max_speed
+		self.rotation = 0
 	end
 end
 
