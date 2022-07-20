@@ -12,7 +12,7 @@ function update(self, dt)
 	if gs.state ~= GS_PLAYING then
 		return
 	end
-	self.timer = self.timer - dt
+	self.timer = self.timer - dt * gs.game_speed_multiplier
 	if self.timer <= 0 then
 		self.timer = 1/frequency
 		local p = go.get_position()
