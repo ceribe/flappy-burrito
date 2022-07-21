@@ -1,6 +1,6 @@
 components {
   id: "collectible"
-  component: "/main/collectible.script"
+  component: "/main/collectible/collectible.script"
   position {
     x: 0.0
     y: 0.0
@@ -15,7 +15,7 @@ components {
 }
 components {
   id: "particle"
-  component: "/main/particle.particlefx"
+  component: "/main/collectible/particle.particlefx"
   position {
     x: 0.0
     y: 0.0

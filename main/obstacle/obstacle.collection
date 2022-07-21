@@ -1,7 +1,7 @@
 name: "default"
 instances {
   id: "collectible"
-  prototype: "/main/collectible.go"
+  prototype: "/main/collectible/collectible.go"
   position {
     x: 0.0
     y: 0.0
@@ -24,7 +24,7 @@ embedded_instances {
   id: "upper_fry"
   data: "components {\n"
   "  id: \"fry\"\n"
-  "  component: \"/main/fry.script\"\n"
+  "  component: \"/main/obstacle/fry.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -127,7 +127,7 @@ embedded_instances {
   id: "lower_fry"
   data: "components {\n"
   "  id: \"fry\"\n"
-  "  component: \"/main/fry.script\"\n"
+  "  component: \"/main/obstacle/fry.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"

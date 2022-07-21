@@ -1,4 +1,4 @@
-font: "/assets/VCR_OSD_MONO.ttf"
+font: "/assets/fonts/VCR_OSD_MONO.ttf"
 material: "/builtins/fonts/font.material"
 size: 64
 antialias: 0
