@@ -2,7 +2,7 @@ local gs = require "game_state"
 
 local types = { "avocado", "pepper", "cheese", "tomato", "gold-coin", "diamond-coin" }
 local particle_tints = { 
-	avocado = vmath.vector4(0, 1, 0, 1),
+	avocado = vmath.vector4(0.69, 0.88, 0.11, 1),
 	pepper = vmath.vector4(1, 0, 0, 1),
 	cheese = vmath.vector4(1, 0.5, 0, 1),
 	tomato = vmath.vector4(1, 0, 0, 1)

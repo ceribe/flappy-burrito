@@ -49,14 +49,8 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("avocado_collected") then
 		gs.player_has_avocado_shield = true
 		msg.post("#sprite", "play_animation", { id = hash("burrito-con-avocado") })
-	elseif message_id == hash("fry_collision") then
-		if gs.player_has_avocado_shield then
-			gs.player_has_avocado_shield = false
-			msg.post("#sprite", "play_animation", { id = hash("burrito") })
-			go.delete(message.fry_id)
-			-- TODO Spawn some particles
-		else
-			msg.post("/main_go#main", "player_died")
-		end
+	elseif message_id == hash("avocado_shield_destroyed") then
+		msg.post("/player#sprite", "play_animation", { id = hash("burrito") })
+		particlefx.play("#avocado_particle")
 	end
 end

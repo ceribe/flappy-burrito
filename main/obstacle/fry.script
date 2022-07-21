@@ -1,5 +1,9 @@
 local gs = require "game_state"
 
+function init(self)
+	self.is_destroyed = false
+end
+
 function update(self, dt)
 	if gs.state ~= GS_PLAYING then
 		return
@@ -9,12 +13,25 @@ function update(self, dt)
 	if p.x < -100 then
 		go.delete()
 	end
+
+	if self.is_destroyed then
+		p.y = p.y + gs.game_speed * gs.game_speed_multiplier * dt * 10
+		p.z = 1
+	end
+	
 	go.set_position(p)
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("collision_response") then
-		-- TODO Add some particles 
-		msg.post("/player#player", "fry_collision", {fry_id = go.get_id()})
+		-- if gs.player_has_avocado_shield then
+		if true then
+			gs.player_has_avocado_shield = false
+			msg.post("/player", "avocado_shield_destroyed")
+			self.is_destroyed = true
+			msg.post("#collisionobject", "disable")
+		else
+			msg.post("/main_go#main", "player_died")
+		end
 	end
 end
