@@ -3,6 +3,10 @@ local gs = require "game_state"
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 } )
+
+	self.save_file_path = sys.get_save_file("flappy_burrito", "save_file")
+	local previous_save = sys.load(self.save_file_path)
+	msg.post("/gui#gui", "set_high_score", {high_score = previous_save.high_score or 0})
 end
 
 function set_biome(name)
@@ -40,6 +44,10 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("player_died") then
 		gs.state = GS_PLAYER_DIED
 		msg.post("/gui#gui", "player_died")
+		local previous_save = sys.load(self.save_file_path)
+		if previous_save.high_score == nil or gs.score > previous_save.high_score then
+			sys.save(self.save_file_path, {high_score = gs.score})
+		end
 	end
 end
 

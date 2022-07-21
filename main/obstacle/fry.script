@@ -24,8 +24,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("collision_response") then
-		-- if gs.player_has_avocado_shield then
-		if true then
+		if gs.player_has_avocado_shield then
 			gs.player_has_avocado_shield = false
 			msg.post("/player", "avocado_shield_destroyed")
 			self.is_destroyed = true

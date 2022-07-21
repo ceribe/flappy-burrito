@@ -11,7 +11,7 @@ local particle_tints = {
 function init(self)
 	math.randomseed(os.time())
 	assign_random_type(self)
-	self.type = types[math.random(1, 6)] -- For testing
+	-- self.type = types[math.random(1, 6)] -- For testing
 	msg.post("#sprite", "play_animation", { id = hash(self.type) })
 end
 
