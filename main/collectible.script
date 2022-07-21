@@ -1,6 +1,12 @@
 local gs = require "game_state"
 
 local types = { "avocado", "pepper", "cheese", "tomato", "gold-coin", "diamond-coin" }
+local particle_tints = { 
+	avocado = vmath.vector4(0, 1, 0, 1),
+	pepper = vmath.vector4(1, 0, 0, 1),
+	cheese = vmath.vector4(1, 0.5, 0, 1),
+	tomato = vmath.vector4(1, 0, 0, 1)
+}
 
 function init(self)
 	math.randomseed(os.time())
@@ -41,11 +47,28 @@ function update(self, dt)
 	go.set_position(p)
 end
 
+function emitter_state_change(self, id, emitter, state)
+	if emitter == hash("exhaust") and state == particlefx.EMITTER_STATE_POSTSPAWN then
+		particlefx.stop("#particlefx")
+		go.delete()
+	end
+end
+
+function spawn_particles_if_needed(self)
+	tint = particle_tints[self.type]
+	if tint == nil then
+		go.delete()
+		return
+	end
+	particlefx.play("#particle", emitter_state_change)
+	particlefx.set_constant("#particle", "emitter", "tint", tint)
+end
+
 function on_message(self, message_id, message, sender)
 	if message_id == hash("collision_response") then
 		gs.score = gs.score + get_score(self)
 		msg.post("/gui#gui", "update_score", {score = gs.score})
-		-- TODO Add some particles 
+
 		if self.type == "pepper" then
 			msg.post("/main_go#main", "start_chilli_time")
 		elseif self.type == "cheese" then
@@ -53,6 +76,9 @@ function on_message(self, message_id, message, sender)
 		elseif self.type == "avocado" then
 			msg.post("/player#player", "avocado_collected")
 		end
-		go.delete()
+		
+		msg.post("#sprite", "disable")
+		msg.post("#collisionobject", "disable")
+		spawn_particles_if_needed(self)
 	end
 end
