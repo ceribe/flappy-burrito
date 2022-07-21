@@ -1,9 +1,9 @@
 # Flappy Burrito
 
 <p float="left">
-  <img src="assets/app_icons/ss_3.png" width="300">
-  <img src="assets/app_icons/ss_1.png" width="300">
-  <img src="assets/app_icons/ss_4.png" width="300">
+  <img src="assets/app_icons/ss_3.png" width="250">
+  <img src="assets/app_icons/ss_1.png" width="250">
+  <img src="assets/app_icons/ss_4.png" width="250">
 </p>
 
 # Description
