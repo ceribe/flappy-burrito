@@ -5,12 +5,28 @@ function init(self)
 	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 } )
 
 	self.save_file_path = sys.get_save_file("flappy_burrito", "save_file")
-	local previous_save = sys.load(self.save_file_path)
-	msg.post("/gui#gui", "set_high_score", {high_score = previous_save.high_score or 0})
+	self.save = sys.load(self.save_file_path)
+	self.save.high_score = self.save.high_score or 0
+	msg.post("/gui#gui", "set_high_score", {high_score = self.save.high_score})
 end
 
+local biomes = {
+	default = "default",
+	cheese = "cheese",
+	chilli = "chilli"
+}
+
+local special_biome_max_time = 8.1
+
 function set_biome(name)
-	gs.game_speed_multiplier = gs.remaining_cheese_time > 0 and 0.5 or 1
+	if name == biomes.cheese then
+		gs.remaining_cheese_time = special_biome_max_time
+		gs.remaining_chilli_time = 0
+	elseif name == biomes.chilli then
+		gs.remaining_chilli_time = special_biome_max_time
+		gs.remaining_cheese_time = 0
+	end
+	gs.game_speed_multiplier = name == "cheese" and 0.5 or 1
 	msg.post("/bg#sprite", "play_animation", { id = hash("bg-" .. name) })
 end
 
@@ -18,43 +34,37 @@ function update(self, dt)
 	if gs.remaining_chilli_time > 0 then
 		gs.remaining_chilli_time = gs.remaining_chilli_time - dt
 		if gs.remaining_chilli_time <= 0 then
-			set_biome("default")
+			set_biome(biomes.default)
 		end
 	end
 
 	if gs.remaining_cheese_time > 0 then
 		gs.remaining_cheese_time = gs.remaining_cheese_time - dt
 		if gs.remaining_cheese_time <= 0 then
-			set_biome("default")
+			set_biome(biomes.default)
 		end
 	end
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start_chilli_time") then
-		-- TODO Show text 
-		gs.remaining_chilli_time = 8.1
-		gs.remaining_cheese_time = 0
-		set_biome("chilli")
+		set_biome(biomes.chilli)
 	elseif message_id == hash("start_cheese_time") then
-		-- TODO Show text 
-		gs.remaining_cheese_time = 8.1
-		gs.remaining_chilli_time = 0
-		set_biome("cheese")
+		set_biome(biomes.cheese)
 	elseif message_id == hash("player_died") then
 		gs.state = GS_PLAYER_DIED
 		msg.post("/gui#gui", "player_died")
-		local previous_save = sys.load(self.save_file_path)
-		if previous_save.high_score == nil or gs.score > previous_save.high_score then
-			sys.save(self.save_file_path, {high_score = gs.score})
+		if gs.score > self.save.high_score then
+			self.save.high_score = gs.score 
 		end
+		sys.save(self.save_file_path, self.save)
 	end
 end
 
 function on_input(self, action_id, action)
 	if (action_id == hash("touch") or action_id == hash("jump")) and action.pressed then
 		if gs.state == GS_PLAYER_DIED then
-			sys.reboot()
+			sys.reboot() -- Yeah I know it's not the best way to do this
 		end
 	end
 end
