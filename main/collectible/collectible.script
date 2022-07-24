@@ -55,7 +55,7 @@ function emitter_state_change(self, id, emitter, state)
 end
 
 function spawn_particles_if_needed(self)
-	tint = particle_tints[self.type]
+	local tint = particle_tints[self.type]
 	if tint == nil then
 		go.delete()
 		return
