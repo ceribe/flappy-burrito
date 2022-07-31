@@ -17,7 +17,12 @@ function update(self, dt)
 	end
 	
 	local p = go.get_position()
-	p.y = p.y + self.speed * dt
+	local distance_travelled_this_frame = self.speed * dt
+	-- This is done to allow the player to fall faster so it is actually possible to play the game when game speed reaches 2.0
+	if distance_travelled_this_frame < 0 then
+		distance_travelled_this_frame = distance_travelled_this_frame * gs.get_game_speed_multiplier()
+	end
+	p.y = p.y + distance_travelled_this_frame
 	if p.y < min_y or p.y > max_y then
 		msg.post("/main_go#main", "player_died")
 	end

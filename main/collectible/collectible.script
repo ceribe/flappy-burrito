@@ -40,7 +40,7 @@ function update(self, dt)
 		return
 	end
 	local p = go.get_position()
-	p.x = p.x + gs.game_speed * gs.game_speed_multiplier * dt
+	p.x = p.x + gs.game_speed * gs.get_game_speed_multiplier() * dt
 	if p.x < -100 then
 		go.delete()
 	end
@@ -67,6 +67,7 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("collision_response") then
 		gs.score = gs.score + get_score(self)
+		gs.update_game_speed_multiplier()
 		msg.post("/gui#gui", "update_score", {score = gs.score})
 
 		if self.type == "pepper" then

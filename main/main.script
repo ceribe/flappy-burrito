@@ -26,7 +26,6 @@ function set_biome(name)
 		gs.remaining_chilli_time = special_biome_max_time
 		gs.remaining_cheese_time = 0
 	end
-	gs.game_speed_multiplier = name == "cheese" and 0.5 or 1
 	msg.post("/bg#sprite", "play_animation", { id = hash("bg-" .. name) })
 end
 

@@ -9,13 +9,13 @@ function update(self, dt)
 		return
 	end
 	local p = go.get_position()
-	p.x = p.x + gs.game_speed * gs.game_speed_multiplier * dt
+	p.x = p.x + gs.game_speed * gs.get_game_speed_multiplier() * dt
 	if p.x < -100 then
 		go.delete()
 	end
 
 	if self.is_destroyed then
-		p.y = p.y + gs.game_speed * gs.game_speed_multiplier * dt * 10
+		p.y = p.y + gs.game_speed * gs.get_game_speed_multiplier() * dt * 10
 		p.z = 1
 	end
 	
