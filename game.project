@@ -2,6 +2,7 @@
 title = Flappy Burrito
 publisher = Ceribe
 developer = Ceribe
+version = 1.0.0.1
 
 [bootstrap]
 main_collection = /main/main.collectionc
@@ -22,7 +23,7 @@ app_icon_144x144 = /assets/app_icons/res/mipmap-xxhdpi/ic_launcher.png
 app_icon_192x192 = /assets/app_icons/res/mipmap-xxxhdpi/ic_launcher.png
 input_method = HiddenInputField
 package = com.kagamiapps.flappyburrito
-version_code = 3
+version_code = 4
 
 [script]
 shared_state = 1
